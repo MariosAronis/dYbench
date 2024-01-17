@@ -87,7 +87,7 @@ EOF
 # Create SSD volume for dybench-node
 resource "aws_ebs_volume" "dybench-node-chaindata" {
   count             = var.ec2-count
-  availability_zone = aws_instance.dybench-validator["${count.index}"].availability_zone
+  availability_zone = aws_instance.dybench-node["${count.index}"].availability_zone
   size              = var.storage
   type              = "gp2"
 

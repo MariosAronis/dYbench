@@ -11,5 +11,5 @@ output "VPN-Server-Private-IP" {
 }
 
 output "dybench-deploy-IAM-Role" {
-  value = module.iam-main.dybench-deploy-iam-role.arn
+  value = module.iam-main.dybenchnode-deploy-iam-role.arn
 }

@@ -1,4 +1,4 @@
-output "Validators-Private-IPs" {
+output "dybench-Private-IPs" {
   value = ["${aws_instance.dybench-node.*.private_ip}"]
 }
 
