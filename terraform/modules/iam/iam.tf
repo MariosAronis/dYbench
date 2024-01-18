@@ -194,7 +194,7 @@ resource "aws_iam_policy" "dybench-deployments-deploy" {
 				"arn:aws:ec2:*:*:security-group/sg-0ba43a8f2aaf84a1c",
 				"arn:aws:ec2:*:*:subnet/subnet-0872eac9926bc6a0d",
 				"arn:aws:ec2:*:*:network-interface/*",
-        "arn:aws:iam::044425962075:instance-profile/dybenchnode_profile",
+        "arn:aws:iam::044425962075:instance-profile/dybenchnode-profile",
         "arn:aws:iam::044425962075:role/dybenchnode"
 			],
 			"Condition": {
