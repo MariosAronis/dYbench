@@ -3,12 +3,9 @@
         "commands": [
             "#!/bin/bash",
             "hostnamectl set-hostname dybench-node-1",
-            "git config --global --add safe.directory /home/ubuntu/dymension",
-            "HOME=/home/ubuntu",
-            "export PATH=$PATH:/home/ubuntu/go/bin",
-            "cd /home/ubuntu/dymension; make install",
-            "bash /home/ubuntu/dymension/scripts/setup_local.sh",
-            "dymd start"
+            "cd /home/ubuntu/dymension; su ubuntu -c 'make install'",
+            "su ubuntu -c 'bash /home/ubuntu/dymension/scripts/setup_local.sh'",
+            "su ubuntu -c 'dymd start'"
         ]
     }
 }
