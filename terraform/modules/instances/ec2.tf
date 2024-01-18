@@ -63,6 +63,9 @@ chown -R 1000:1000 /home/$USER/go
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+git clone https://github.com/dymensionxyz/dymension.git
+cd dymension
+make install
 EOF
 
   root_block_device {
