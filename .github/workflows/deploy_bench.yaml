@@ -5,7 +5,7 @@ on:
       validators:
         description: 'Number of validators in private dymensionhub testnet'
         required: true
-        default: '2'
+        default: '1'
         type: choice
         options:
           - 2
@@ -16,7 +16,7 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     env:
-      VALIDATORS: ${{ github.event.inputs.validators || 2 }}
+      VALIDATORS: ${{ github.event.inputs.validators || 1 }}
       DATA_USER: ${{ github.actor }}
     permissions:
       id-token: write
