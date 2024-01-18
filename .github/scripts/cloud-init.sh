@@ -3,7 +3,7 @@
 set -ex
 
 apt-get update
-apt-get install -y net-tools
+apt-get install -y net-tools jq
 apt-get install -y ca-certificates curl gnupg
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -28,5 +28,3 @@ unzip awscliv2.zip
 sudo ./aws/install
 git clone https://github.com/dymensionxyz/dymension.git $HOME/dymension
 chown -R 1000:1000 $HOME/dymension
-cd $HOME/dymension
-make install
