@@ -2,7 +2,7 @@
 
 set -ex
 
-VALUE=VALUE="dymensionHub-node-1"
+VALUE="dymensionHub-node-1"
 
 get_instance_id () {
 InstanceID=`aws ec2 describe-instances \
@@ -15,9 +15,27 @@ echo $InstanceID
 
 BOOTSTRAP_NODE_EC2_ID=`get_instance_id`
 
-aws ssm send-command \
+ssm_command () {
+COMMAND_ID=`aws ssm send-command \
   --profile mariosee \
-  --instance-ids "$InstaceId" \
+  --instance-ids "$BOOTSTRAP_NODE_EC2_ID" \
   --document-name "AWS-RunShellScript" \
-  --cli-input-json file://.github/scripts/upgrade_geth.json
+  --cli-input-json $COMMAND | jq -r ' ."Command" | ."CommandId"'
+  `
+echo $COMMAND_ID 
+}
 
+ssm_command_invocation () {
+SSM_RESULT=`aws ssm get-command-invocation \
+    --profile mariosee \
+    --command-id $COMMAND_ID \
+    --instance-id $BOOTSTRAP_NODE_EC2_ID | jq -r .`
+echo $SSM_RESULT
+}
+
+COMMAND=file://.github/scripts/bootstrap.json
+COMMAND_ID=`ssm_command`
+COMMAND_STATUS=`ssm_command_invocation | jq -r ' ."Status"'`
+# COMMAND_OUTPUT=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'` 
+COMMAND_OUTPUT=`ssm_command_invocation | jq -r . `
+echo $COMMAND_OUTPUT

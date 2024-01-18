@@ -1,0 +1,14 @@
+{
+    "Parameters": {
+        "commands": [
+            "#!/bin/bash",
+            "hostnamectl set-hostname dybench-node-111",
+            "git config --global --add safe.directory /home/ubuntu/dymension",
+            "HOME=/home/ubuntu",
+            "export PATH=$PATH:/home/ubuntu/go/bin",
+            "cd /home/ubuntu/dymension; make install",
+            "bash /home/ubuntu/dymension/scripts/setup_local.sh",
+            "dymd start"
+        ]
+    }
+}
