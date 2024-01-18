@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#Number of validators in out privater dymensionHub
+set -x
+
+#Number of validators in our privater dymensionHub
 VALIDATORS=$1
 AMI="ami-079167f081a690d5a"
 VALUE="dymensionHub-node"
