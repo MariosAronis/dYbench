@@ -1,0 +1,36 @@
+name: Deploy DymensionHub
+on:
+  workflow_dispatch:
+    inputs:
+      validators:
+        description: 'Number of validators in provate dymensionhub testnet'
+        required: true
+        default: '2'
+        type: choice
+        options:
+          - 2
+          - 4
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    env:
+      VALIDATORS: ${{ github.event.inputs.validators || 2 }}
+      DATA_USER: ${{ github.actor }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+
+# REFERENCE: https://github.com/aws-actions/configure-aws-credentials#overview
+# ENHANCEMENT: SLC can be further tightened with the use of two separate OICD providers;
+# one for mainnet and one for testnet
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::044425962075:role/flashnode-deploy-slc
+        role-duration-seconds: 900
+        aws-region: us-west-2 
+    
+
