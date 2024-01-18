@@ -35,7 +35,11 @@ jobs:
 
     - name: Spin chain validators
       run: |
-          .github/scripts/deploy_dyhub.sh
+          echo `pwd`
+    - name: Spin chain validators2
+      run: |
+          echo `ls -altrh`
+          # .github/scripts/deploy_dyhub.sh
 
     
 
