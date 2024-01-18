@@ -33,9 +33,14 @@ jobs:
         role-duration-seconds: 900
         aws-region: us-west-2 
 
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false    
+
     - name: Spin chain validators
       run: |
-          .github/scripts/deploy_dyhub.sh
+        ./.github/scripts/deploy_dyhub.sh
 
     
 
