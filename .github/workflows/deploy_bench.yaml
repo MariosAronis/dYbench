@@ -35,6 +35,7 @@ jobs:
 
     - name: Spin chain validators
       run: |
-          ./.github/scripts/deploy_dyhub.sh
+          .github/scripts/deploy_dyhub.sh
+
     
 
