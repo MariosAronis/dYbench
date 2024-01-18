@@ -191,8 +191,8 @@ resource "aws_iam_policy" "dybench-deployments-deploy" {
 				"arn:aws:ec2:*:*:instance/*",
 				"arn:aws:ec2:*:*:key-pair/*",
 				"arn:aws:ec2:*:*:volume/*",
-				"arn:aws:ec2:*:*:security-group/sg-06d9f0fd0b749c6ee",
-				"arn:aws:ec2:*:*:subnet/subnet-0160d2ef49ea42ecc",
+				"arn:aws:ec2:*:*:security-group/sg-0ba43a8f2aaf84a1c",
+				"arn:aws:ec2:*:*:subnet/	subnet-0872eac9926bc6a0d",
 				"arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:iam::044425962075:instance-profile/dybenchnode_profile",
         "arn:aws:iam::044425962075:role/dybenchnode"
@@ -200,7 +200,7 @@ resource "aws_iam_policy" "dybench-deployments-deploy" {
 			"Condition": {
 				"ForAllValues:StringEquals": {
 					"ec2:KeyPairName": [
-						"mariosee"
+						"dybench"
 					]
 				},
 				"ForAllValues:StringLike": {
