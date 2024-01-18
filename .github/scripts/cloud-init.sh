@@ -17,10 +17,10 @@ USER=`getent passwd 1000 | cut -d: -f1`
 tar -C /home/$USER -xzf go1.21.4.linux-amd64.tar.gz
 usermod -aG docker $USER
 echo "export PATH=$PATH:/home/$USER/go/bin" >> /home/$USER/.bashrc
-mkfs -t xfs /dev/nvme1n1 
-mkdir /data
-sudo mount /dev/nvme1n1 /data
-chown -R 1000:1000 /data
+# mkfs -t xfs /dev/nvme1n1 
+# mkdir /data
+# sudo mount /dev/nvme1n1 /data
+# chown -R 1000:1000 /data
 chown -R 1000:1000 /home/$USER/go
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
