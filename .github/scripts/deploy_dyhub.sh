@@ -17,14 +17,14 @@ echo $VPC_ID
 get_subnet_id () {
 SUBNET_ID=`aws ec2 describe-subnets \
     --filters "Name=tag:Name, Values=dybench-priv" \
-    --output json --query 'Subnets[*].{SubnetId:SubnetId}' | jq '. [] | ."SubnetId"'`
+    --output json --query 'Subnets[*].{SubnetId:SubnetId}' | jq -r '. [] | ."SubnetId"'`
 echo $SUBNET_ID
 }
 
 get_sg_id () {
 SG_ID=`aws ec2 describe-security-groups \
     --filters "Name=tag:Name, Values=dybench-private" \
-    --output json --query 'SecurityGroups[*]'.{GroupId:GroupId} | jq '. [] | ."GroupId"'`
+    --output json --query 'SecurityGroups[*]'.{GroupId:GroupId} | jq -r '. [] | ."GroupId"'`
 echo $SG_ID
 }
 
