@@ -128,7 +128,7 @@ data "aws_iam_policy_document" "dybench-deployments-assume_role-slc" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:MariosAronis/dybench-WIP:*"]
+      values   = ["repo:MariosAronis/dYbench:*"]
     }
   }
 }
