@@ -42,5 +42,12 @@ jobs:
       run: |
         ./.github/scripts/deploy_dyhub.sh ${{ env.VALIDATORS }}
 
+    - name: Sleep for 3 minutes
+      run: sleep 180s
+      shell: bash
+      
+    - name: Bootstrap network
+      run: |
+        ./.github/scripts/bootstrap_network.sh
     
 
