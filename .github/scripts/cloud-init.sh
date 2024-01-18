@@ -14,6 +14,7 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin gcc make jq unzip -y
 wget https://go.dev/dl/go1.21.4.linux-amd64.tar.gz
 USER=`getent passwd 1000 | cut -d: -f1`
+HOME=`getent passwd 1000 | cut -d: -f6`
 tar -C /home/$USER -xzf go1.21.4.linux-amd64.tar.gz
 usermod -aG docker $USER
 echo "export PATH=$PATH:/home/$USER/go/bin" >> /home/$USER/.bashrc
@@ -25,7 +26,7 @@ chown -R 1000:1000 /home/$USER/go
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
-git clone https://github.com/dymensionxyz/dymension.git ~/
-chown -R 1000:1000 ~/dymension
-cd dymension
+git clone https://github.com/dymensionxyz/dymension.git $HOME
+chown -R 1000:1000 $HOME/dymension
+cd $HOME/dymension
 make install
