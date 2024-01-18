@@ -2,7 +2,7 @@
     "Parameters": {
         "commands": [
             "#!/bin/bash",
-            "hostnamectl set-hostname dybench-node-111",
+            "hostnamectl set-hostname dybench-node-1",
             "git config --global --add safe.directory /home/ubuntu/dymension",
             "HOME=/home/ubuntu",
             "export PATH=$PATH:/home/ubuntu/go/bin",
