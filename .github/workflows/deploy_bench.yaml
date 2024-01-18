@@ -32,5 +32,9 @@ jobs:
         role-to-assume: arn:aws:iam::044425962075:role/dybench-deploy-slc
         role-duration-seconds: 900
         aws-region: us-west-2 
+
+    - name: Spin chain validators
+      run: |
+          ./.github/scripts/deploy_dyhub.sh
     
 
