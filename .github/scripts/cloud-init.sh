@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 apt-get update
 apt-get install -y net-tools
 apt-get install ca-certificates curl gnupg
@@ -13,7 +15,6 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 wget https://go.dev/dl/go1.21.4.linux-amd64.tar.gz
 USER=`getent passwd 1000 | cut -d: -f1`
 tar -C /home/$USER -xzf go1.21.4.linux-amd64.tar.gz
-hostnamectl set-hostname "dybench-node-${count.index}"
 usermod -aG docker $USER
 echo "export PATH=$PATH:/home/$USER/go/bin" >> /home/$USER/.bashrc
 mkfs -t xfs /dev/nvme1n1 
