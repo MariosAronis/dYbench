@@ -48,6 +48,6 @@ jobs:
       
     - name: Bootstrap network
       run: |
-        ./.github/scripts/bootstrap_network.sh
+        ./.github/scripts/bootstrap_network.sh ${{ env.VALIDATORS }}
     
 
