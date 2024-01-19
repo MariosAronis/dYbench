@@ -68,18 +68,10 @@ END=$VALIDATORS
 
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
   do
+    echo $NODE_INDEX
     HOSTNAME="dymensionHub-node-$NODE_INDEX"
-    COMMAND="{"commands":["#!/bin/bash","hostnamectl set-hostname $HOSTNAME"]}"
+    parameters="commands='hostnamectl set-hostname {{$HOSTNAME}}'"
     VALUE=$HOSTNAME
     INSTANCE_ID=`get_instance_id`
     ssm_command
-    COMMAND="{"commands":["#!/bin/bash","cd /home/ubuntu/dymension; su ubuntu -c 'make install'"]}"
-
-
-
-
-for node in join_validators:
-    build dymd
-    add key
-    send allocation
-    create validator
+  done
