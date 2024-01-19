@@ -42,6 +42,9 @@ echo $SSM_RESULT
 
 COMMAND=file://.github/scripts/bootstrap.json
 COMMAND_ID=`ssm_script`
+
+sleep 120
+
 COMMAND_STATUS=`ssm_command_invocation | jq -r ' ."Status"'`
 COMMAND_OUTPUT=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'` 
 # COMMAND_OUTPUT=`ssm_command_invocation | jq -r . `
