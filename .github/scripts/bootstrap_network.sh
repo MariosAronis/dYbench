@@ -26,7 +26,7 @@ ssm_command () {
 COMMAND_ID=`aws ssm send-command \
   --instance-ids "$INSTANCE_ID" \
   --document-name "AWS-RunShellScript" \
-  --parameters $COMMAND | jq -r ' ."Command" | ."CommandId"'
+  --parameters "$parameters" | jq -r ' ."Command" | ."CommandId"'
   `
 echo $COMMAND_ID
 }
