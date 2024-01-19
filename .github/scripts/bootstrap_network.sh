@@ -50,10 +50,12 @@ COMMAND_OUTPUT=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
 # COMMAND_OUTPUT=`ssm_command_invocation | jq -r . `
 echo $COMMAND_OUTPUT
 
-sleep 120
 
 COMMAND=file://.github/scripts/dymd_status.json
 COMMAND_ID=`ssm_script`
+
+sleep 10
+
 NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
 NODE_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
