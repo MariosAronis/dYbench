@@ -74,4 +74,5 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     VALUE=$HOSTNAME
     INSTANCE_ID=`get_instance_id`
     ssm_command
+    parameters="commands='aws s3 cp s3://dybenchd-binaries/dymd /home/ubuntu/go/bin'"
   done
