@@ -66,7 +66,7 @@ COMMAND_ID=`ssm_script`
 sleep 10
 
 NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
-NODE_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."id"'`
+NODE_ID=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
 LISTEN_ADR=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."listen_addr"'`
 SEED_NODE_PRIVIP=`get_instance_priv_ip`
