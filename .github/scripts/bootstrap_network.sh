@@ -44,7 +44,7 @@ VALUE="dymensionHub-node-1"
 INSTANCE_ID=`get_instance_id`
 COMMAND_ID=`ssm_script`
 
-sleep 120
+sleep 180
 
 COMMAND_STATUS=`ssm_command_invocation | jq -r ' ."Status"'`
 COMMAND_OUTPUT=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
