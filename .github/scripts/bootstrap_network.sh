@@ -76,6 +76,8 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     ssm_command
     parameters="commands='aws s3 cp s3://dybenchd-binaries/dymd /home/ubuntu/go/bin'"
     ssm_command
+    parameters="commands='chmod -R 1000:1000 /home/ubuntu/go/bin'"
+    ssm_command
     # RUN ONCE TO CREATE THE $HOME/.dymension directory structure
     parameters="commands='/home/ubuntu/go/bin/dymd start --json-rpc.enable > /home/ubuntu/.dymension/dymd.log 2>&1 &'"
     ssm_command
