@@ -38,6 +38,14 @@ SSM_RESULT=`aws ssm get-command-invocation \
 echo $SSM_RESULT
 }
 
+get_instance_priv_ip () {
+InstancePrivIP=`aws ec2 describe-instances \
+  --filters "Name=tag:Name,Values=$VALUE" \
+            "Name=instance-state-name,Values=running" \
+  --output json --query 'Reservations[*].Instances[*].{PrivateIpAddress:PrivateIpAddress}' | jq -r '.[] | .[] | ."PrivateIpAddress"'`
+  echo $InstancePrivIP
+}
+
 # START NODE 1 (BOOTSTRAP/GENESIS)
 COMMAND=file://.github/scripts/bootstrap.json
 VALUE="dymensionHub-node-1"
@@ -61,10 +69,16 @@ NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
 NODE_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
 LISTEN_ADR=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."listen_addr"'`
+SEED_NODE_PRIVIP=`get_instance_priv_ip`
+SEED_NODE_LISTEN_PORT=`echo $LISTEN_ADDR | cut -d ":" -f 3`
+SEED="$NODE_ID"@"$SEED_NODE_PRIVIP":"$SEED_NODE_LISTEN_PORT"
 
 # JOIN OTHER NODES
 START=2
 END=$VALIDATORS
+
+OLDLINE='seeds = ""'
+NEWLINE="seeds = \"$SEED\""
 
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
   do
@@ -74,6 +88,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     VALUE=$HOSTNAME
     INSTANCE_ID=`get_instance_id`
     ssm_command
-    parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
+    parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh {{$OLDLINE}} {{$NEWLINE}}'"
     ssm_command
+
   done
