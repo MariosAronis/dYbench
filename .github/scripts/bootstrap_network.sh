@@ -75,4 +75,10 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     INSTANCE_ID=`get_instance_id`
     ssm_command
     parameters="commands='aws s3 cp s3://dybenchd-binaries/dymd /home/ubuntu/go/bin'"
+    ssm_command
+    # RUN ONCE TO CREATE THE $HOME/.dymension directory structure
+    parameters="commands='/home/ubuntu/go/bin/dymd start --json-rpc.enable > /home/ubuntu/.dymension/dymd.log 2>&1 &'"
+    ssm_command
+    parameters="commands='aws s3 cp s3://dybenchd-binaries/genesis.json /home/ubuntu/.dymension/config/'"
+    ssm_command
   done
