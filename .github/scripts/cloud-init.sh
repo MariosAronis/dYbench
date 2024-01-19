@@ -27,4 +27,6 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 git clone https://github.com/MariosAronis/dymension.git $HOME/dymension
+git clone https://github.com/MariosAronis/dYbench.git $HOME/dYbench
 chown -R 1000:1000 $HOME/dymension
+chown -R 1000:1000 $HOME/dYbench
