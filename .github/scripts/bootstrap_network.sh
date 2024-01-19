@@ -76,6 +76,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     ssm_command
     parameters="commands='aws s3 cp s3://dybenchd-binaries/dymd /home/ubuntu/go/bin'"
     ssm_command
+    sleep 10 
     parameters="commands='chown 1000:1000 /home/ubuntu/go/bin/dymd;chmod +x /home/ubuntu/go/bin/dymd'"
     ssm_command
     # RUN ONCE TO CREATE THE $HOME/.dymension directory structure
