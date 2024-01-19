@@ -1,7 +1,6 @@
 {
     "Parameters": {
         "commands": [
-            "#!/bin/bash",
             "su ubuntu -c '$HOME/go/bin/dymd status'"
         ]
     }
