@@ -41,7 +41,7 @@ aws ec2 run-instances \
   --user-data "file://.github/scripts/cloud-init.sh" \
   --image-id $AMI \
   --count 1 \
-  --instance-type t3.2xlarge \
+  --instance-type t3.xlarge \
   --key-name dybench \
   --security-group-ids $SG_ID \
   --subnet-id $SUBNET_ID \
