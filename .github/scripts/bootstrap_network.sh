@@ -24,7 +24,7 @@ echo $COMMAND_ID
 
 ssm_command () {
 COMMAND_ID=`aws ssm send-command \
-  --instance-ids "$BOOTSTRAP_NODE_EC2_ID" \
+  --instance-ids "$INSTANCE_ID" \
   --document-name "AWS-RunShellScript" \
   --parameters $COMMAND | jq -r ' ."Command" | ."CommandId"'
   `
@@ -34,7 +34,7 @@ echo $COMMAND_ID
 ssm_command_invocation () {
 SSM_RESULT=`aws ssm get-command-invocation \
   --command-id $COMMAND_ID \
-  --instance-id $BOOTSTRAP_NODE_EC2_ID | jq -r .`
+  --instance-id $INSTANCE_ID | jq -r .`
 echo $SSM_RESULT
 }
 
