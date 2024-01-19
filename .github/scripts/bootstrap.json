@@ -5,7 +5,7 @@
             "hostnamectl set-hostname dybench-node-1",
             "cd /home/ubuntu/dymension; su ubuntu -c 'make install'",
             "su ubuntu -c 'bash $HOME/dymension/scripts/setup_local.sh'",
-            "su ubuntu -c 'bash $HOME/go/bin/dymd start --json-rpc.enable > $HOME/.dymension/dymd.log 2>&1 &'"
+            "su ubuntu -c '$HOME/go/bin/dymd start --json-rpc.enable > $HOME/.dymension/dymd.log 2>&1 &'"
         ]
     }
 }
