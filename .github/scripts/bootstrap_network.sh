@@ -46,8 +46,8 @@ COMMAND_ID=`ssm_script`
 
 sleep 180
 
-COMMAND_STATUS=`ssm_command_invocation | jq -r ' ."Status"'`
-COMMAND_OUTPUT=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
+# COMMAND_STATUS=`ssm_command_invocation | jq -r ' ."Status"'`
+# COMMAND_OUTPUT=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
 # COMMAND_OUTPUT=`ssm_command_invocation | jq -r . `
 #echo $COMMAND_OUTPUT
 
