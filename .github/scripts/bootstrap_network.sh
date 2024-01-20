@@ -46,11 +46,19 @@ InstancePrivIP=`aws ec2 describe-instances \
   echo $InstancePrivIP
 }
 
+
 # START NODE 1 (BOOTSTRAP/GENESIS)
 COMMAND=file://.github/scripts/bootstrap.json
 VALUE="dymensionHub-node-1"
 INSTANCE_ID=`get_instance_id`
 COMMAND_ID=`ssm_script`
+
+# CREATE NETWORK MAP
+
+NODES=$(jq --null-input \
+  --arg leader "$INSTANCE_ID" \
+  --argjson validators [] \
+  '{"leader": $leader, "validators": $validators}')
 
 sleep 180
 
