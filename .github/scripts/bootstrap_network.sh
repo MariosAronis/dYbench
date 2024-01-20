@@ -66,18 +66,15 @@ COMMAND_ID=`ssm_script`
 sleep 10
 
 NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
-echo $NODE_STATUS
 NODE_ID=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
-LISTEN_ADR=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."listen_addr"'`
+LISTEN_ADDR=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."listen_addr"'`
 SEED_NODE_PRIVIP=`get_instance_priv_ip`
 SEED_NODE_LISTEN_PORT=`echo $LISTEN_ADDR | cut -d ":" -f 3`
 SEED="$NODE_ID"@"$SEED_NODE_PRIVIP":"$SEED_NODE_LISTEN_PORT"
 
 echo $LISTEN_ADDR
 echo $SEED_NODE_LISTEN_PORT
-echo $SEED_NODE_PRIVIP
-echo $SEED
 
 # JOIN OTHER NODES
 START=2
