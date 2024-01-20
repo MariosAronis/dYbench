@@ -68,7 +68,7 @@ sleep 10
 NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
 NODE_ID=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
-LISTEN_ADDR=`echo $NODE_STATUS | jq -r' ."NodeInfo" | ."listen_addr"'`
+LISTEN_ADDR=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."listen_addr"'`
 SEED_NODE_PRIVIP=`get_instance_priv_ip`
 SEED_NODE_LISTEN_PORT=`echo $LISTEN_ADDR | cut -d ":" -f 3`
 SEED="$NODE_ID"@"$SEED_NODE_PRIVIP":"$SEED_NODE_LISTEN_PORT"
