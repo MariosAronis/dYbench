@@ -2,8 +2,8 @@
 
 set -ex
 
-aws s3 cp s3://dybenchd-binaries/seeds.txt .
-source seeds.txt
+su ubuntu -c 'aws s3 cp s3://dybenchd-binaries/seeds.txt .'
+source /home/ubuntu/seeds.txt 
 
 su ubuntu -c 'aws s3 cp s3://dybenchd-binaries/dymd $HOME/go/bin'
 chmod +x /home/ubuntu/go/bin/dymd

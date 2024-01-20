@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 VALIDATORS=$1
 
@@ -73,6 +73,10 @@ SEED_NODE_PRIVIP=`get_instance_priv_ip`
 SEED_NODE_LISTEN_PORT=`echo $LISTEN_ADDR | cut -d ":" -f 3`
 SEED="$NODE_ID"@"$SEED_NODE_PRIVIP":"$SEED_NODE_LISTEN_PORT"
 
+echo $SEED_NODE_LISTEN_PORT
+echo $SEED_NODE_PRIVIP
+echo $SEED
+
 # JOIN OTHER NODES
 START=2
 END=$VALIDATORS
@@ -80,7 +84,8 @@ END=$VALIDATORS
 OLDLINE='seeds = ""'
 NEWLINE="seeds = \"$SEED\""
 
-echo "OLDLINE=$OLDINE\nNEWLINE=$NEWLINE" >> seeds.txt
+
+echo -e "OLDLINE=$OLDLINE\nNEWLINE=$NEWLINE" >> seeds.txt
 aws s3 cp seeds.txt s3://dybenchd-binaries/
 
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
