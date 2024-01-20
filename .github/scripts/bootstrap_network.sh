@@ -68,7 +68,7 @@ sleep 10
 NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
 NODE_ID=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
-LISTEN_ADDR=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."listen_addr"'`
+LISTEN_ADDR=`echo $NODE_STATUS | jq -r' ."NodeInfo" | ."listen_addr"'`
 SEED_NODE_PRIVIP=`get_instance_priv_ip`
 SEED_NODE_LISTEN_PORT=`echo $LISTEN_ADDR | cut -d ":" -f 3`
 SEED="$NODE_ID"@"$SEED_NODE_PRIVIP":"$SEED_NODE_LISTEN_PORT"
@@ -96,6 +96,10 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     INSTANCE_ID=`get_instance_id`
     ssm_command
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
-    ssm_command
+    COMMAND_ID=`ssm_command`
+
+    COMMAND_OUTPUT=`ssm_command_invocation | jq -r . `
+    echo $COMMAND_OUTPUT
+
 
   done
