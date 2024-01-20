@@ -103,7 +103,14 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     parameters="commands='hostnamectl set-hostname {{$HOSTNAME}}'"
     VALUE=$HOSTNAME
     INSTANCE_ID=`get_instance_id`
+
+    # ADD VALIDATOR TO NODES MAP
+    OBJECT=`jq . <<< {\"$HOSTNAME\":\"$INSTANCE_ID\"}`
+    NODES=`jq " .validators[.validators| length] |=$OBJECT" <<< "$NODES"`
+    
     ssm_command
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
   done
+
+  echo $NODES | jq .
