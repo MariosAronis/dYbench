@@ -80,6 +80,9 @@ END=$VALIDATORS
 OLDLINE='seeds = ""'
 NEWLINE="seeds = \"$SEED\""
 
+echo "OLDLINE=$OLDINE\nNEWLINE=$NEWLINE" >> seeds.txt
+aws s3 cp seeds.txt s3://dybenchd-binaries/
+
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
   do
     echo $NODE_INDEX
@@ -88,7 +91,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     VALUE=$HOSTNAME
     INSTANCE_ID=`get_instance_id`
     ssm_command
-    parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh {{$OLDLINE}} {{$NEWLINE}}'"
+    parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     ssm_command
 
   done
