@@ -2,7 +2,7 @@
 
 set -ex
 
-su ubuntu -c 'aws s3 cp s3://dybenchd-binaries/seeds.txt .'
+su ubuntu -c 'aws s3 cp s3://dybenchd-binaries/seeds.txt $HOME/seeds.txt'
 source /home/ubuntu/seeds.txt 
 
 su ubuntu -c 'aws s3 cp s3://dybenchd-binaries/dymd $HOME/go/bin'

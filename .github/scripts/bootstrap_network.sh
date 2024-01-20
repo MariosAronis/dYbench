@@ -84,7 +84,8 @@ OLDLINE='seeds = ""'
 NEWLINE="seeds = \"$SEED\""
 
 
-echo -e "OLDLINE=\"$OLDLINE\"\nNEWLINE=\"$NEWLINE\"" >> seeds.txt
+# echo -e OLDLINE=$OLDLINE\nNEWLINE=$NEWLINE > seeds.txt
+echo -e OLDLINE="'"$OLDLINE"'""\n"NEWLINE="'"$NEWLINE"'" > seeds.txt
 aws s3 cp seeds.txt s3://dybenchd-binaries/
 
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
@@ -97,9 +98,4 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     ssm_command
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
-
-    COMMAND_OUTPUT=`ssm_command_invocation | jq -r . `
-    echo $COMMAND_OUTPUT
-
-
   done
