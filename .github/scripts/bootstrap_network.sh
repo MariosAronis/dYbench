@@ -66,6 +66,7 @@ COMMAND_ID=`ssm_script`
 sleep 10
 
 NODE_STATUS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
+echo $NODE_STATUS
 NODE_ID=`echo $NODE_STATUS | jq -r ' ."NodeInfo" | ."id"'`
 CHAIN_ID=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."network"'`
 LISTEN_ADR=`echo $NODE_STATUS | jq ' ."NodeInfo" | ."listen_addr"'`
