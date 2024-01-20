@@ -88,7 +88,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     VALUE=$HOSTNAME
     INSTANCE_ID=`get_instance_id`
     ssm_command
-    parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh {{$OLDLINE}} {{$NEWLINE}} > /home/ubuntu/.dymension/join_node.log 2>&1'"
+    parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh {{$OLDLINE}} {{$NEWLINE}}'"
     ssm_command
 
   done
