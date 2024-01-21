@@ -116,7 +116,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
 
-    parameters='su ubuntu -c 'dymd keys show "$HOSTNAME" --keyring-backend test -a''
+    parameters="su ubuntu -c 'dymd keys show "$HOSTNAME" --keyring-backend test -a'"
     COMMAND_ID=`ssm_command`
     sleep 3
 
