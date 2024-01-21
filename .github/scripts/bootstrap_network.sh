@@ -103,13 +103,13 @@ aws s3 cp seeds.txt s3://dybenchd-binaries/
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
   do
     echo $NODE_INDEX
-    HOSTNAME="dymensionHub-node-$NODE_INDEX"
-    parameters="commands='hostnamectl set-hostname {{$HOSTNAME}}'"
-    VALUE=$HOSTNAME
+    HOST_NAME="dymensionHub-node-$NODE_INDEX"
+    parameters="commands='hostnamectl set-hostname {{$HOST_NAME}}'"
+    VALUE=$HOST_NAME
     INSTANCE_ID=`get_instance_id`
 
     # ADD VALIDATOR TO NODES MAP
-    OBJECT=`jq . <<< {\"$HOSTNAME\":\"$INSTANCE_ID\"}`
+    OBJECT=`jq . <<< {\"$HOST_NAME\":\"$INSTANCE_ID\"}`
     NODES=`jq " .validators[.validators| length] |=$OBJECT" <<< "$NODES"`
     
     ssm_command
@@ -120,10 +120,10 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
    COMMAND_ID=`ssm_script`
    RESULT=`ssm_command_invocation`
    sleep 3
-   ADDRESS=`jq -r .StandardOutputContent <<< $A`
+   ADDRESS=`jq -r .StandardOutputContent <<< $RESULT`
 
-    OBJECT=`jq . <<< {\"$HOSTNAME\":\"$ADDRESS\"}`
-    VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
+   OBJECT=`jq . <<< {\"$HOST_NAME\":\"$ADDRESS\"}`
+   VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
   done
 
   echo $NODES | jq .
