@@ -116,11 +116,12 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
 
-    parameters="su ubuntu -c 'dymd keys show "$HOSTNAME" --keyring-backend test -a'"
-    COMMAND_ID=`ssm_command`
-    sleep 3
+   COMMAND=file://.github/scripts/fetch_address.json
+   COMMAND_ID=`ssm_script`
+   RESULT=`ssm_command_invocation`
+   sleep 3
+   ADDRESS=`jq -r .StandardOutputContent <<< $A`
 
-    ADDRESS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
     OBJECT=`jq . <<< {\"$HOSTNAME\":\"$ADDRESS\"}`
     VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
   done
