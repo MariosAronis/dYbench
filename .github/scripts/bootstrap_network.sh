@@ -102,7 +102,6 @@ aws s3 cp seeds.txt s3://dybenchd-binaries/
 
 for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
   do
-    echo $NODE_INDEX
     HOST_NAME="dymensionHub-node-$NODE_INDEX"
     parameters="commands='hostnamectl set-hostname {{$HOST_NAME}}'"
     VALUE=$HOST_NAME
@@ -115,7 +114,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     ssm_command
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
-
+    sleep 20
     COMMAND=file://.github/scripts/fetch_address.json
     COMMAND_ID=`ssm_script`
     RESULT=`ssm_command_invocation`
@@ -123,9 +122,9 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     ADDRESS=`jq -r .StandardOutputContent <<< $RESULT`
     echo $ADDRESS
 
-    OBJECT=`jq . <<< {\"$HOST_NAME\":\"$ADDRESS\"}`
-    echo $OBJECT
-    VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
+    _OBJECT=`jq . <<< {\"$HOST_NAME\":\"$ADDRESS\"}`
+    echo $_OBJECT
+    VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$_OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
   done
 
   echo $NODES | jq .
