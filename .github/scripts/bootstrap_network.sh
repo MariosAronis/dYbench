@@ -116,7 +116,7 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
 
-    parameters='dymd keys show "$HOSTNAME" --keyring-backend test -a'
+    parameters='su ubuntu -c 'dymd keys show "$HOSTNAME" --keyring-backend test -a''
     COMMAND_ID=`ssm_command`
     sleep 3
 
@@ -130,3 +130,4 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
 
   echo $VALIDATORS_ACCOUNTS | jq . >> accounts.json
   aws s3 cp accounts.json s3://dybenchd-binaries/
+ 
