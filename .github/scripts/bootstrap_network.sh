@@ -127,3 +127,6 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
 
   echo $NODES | jq .
   echo $VALIDATORS_ACCOUNTS | jq .
+
+  echo $VALIDATORS_ACCOUNTS | jq . >> accounts.json
+  aws s3 cp accounts.json s3://dybenchd-binaries/
