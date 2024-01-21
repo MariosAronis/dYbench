@@ -60,6 +60,10 @@ NODES=$(jq --null-input \
   --argjson validators [] \
   '{"leader": $leader, "validators": $validators}')
 
+VALIDATORS_ACCOUNTS=$(jq --null-input \
+  --argjson validators_accounts [] \
+  '{"validators_accounts": $validators_accounts}')
+
 sleep 180
 
 # COMMAND_STATUS=`ssm_command_invocation | jq -r ' ."Status"'`
@@ -111,6 +115,15 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     ssm_command
     parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/node_join.sh'"
     COMMAND_ID=`ssm_command`
+
+    parameters='dymd keys show "$HOSTNAME" --keyring-backend test -a'
+    COMMAND_ID=`ssm_command`
+    sleep 3
+
+    ADDRESS=`ssm_command_invocation | jq -r ' ."StandardOutputContent"'`
+    OBJECT=`jq . <<< {\"$HOSTNAME\":\"$ADDRESS\"}`
+    VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
   done
 
   echo $NODES | jq .
+  echo $VALIDATORS_ACCOUNTS | jq .

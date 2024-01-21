@@ -13,3 +13,5 @@ sleep 10
 pkill dymd
 sed -i "s/$OLDLINE/$NEWLINE/g" /home/ubuntu/.dymension/config/config.toml
 su ubuntu -c '$HOME/go/bin/dymd start --json-rpc.enable --json-rpc.address "0.0.0.0:8545" --rpc.laddr "tcp://0.0.0.0:26657" > $HOME/.dymension/dymd.log 2>&1 &'
+
+dymd keys add "$HOSTNAME" --keyring-backend test
