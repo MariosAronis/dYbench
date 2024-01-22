@@ -120,11 +120,12 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
     RESULT=`ssm_command_invocation`
     sleep 3
     ADDRESS=`jq -r .StandardOutputContent <<< $RESULT`
+    _ADDRESS=`jq . <<< \"$ADDRESS\"`
 
     # _OBJECT=`jq . <<< {\"$HOST_NAME\":\"$ADDRESS\"}`
     # echo $_OBJECT
     # VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$_OBJECT" <<< "$VALIDATORS_ACCOUNTS"`
-    VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$ADDRESS" <<< "$VALIDATORS_ACCOUNTS"`
+    VALIDATORS_ACCOUNTS=`jq " .validators_accounts[.validators_accounts| length] |=$_ADDRESS"" <<< "$VALIDATORS_ACCOUNTS"`
   done
 
   echo $NODES | jq .
