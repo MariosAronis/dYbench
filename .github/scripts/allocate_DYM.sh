@@ -18,6 +18,7 @@ $address 1000000000000000000000000000udym \
 --fees 20000000000000udym \
 --sequence $SEQUENCE \
 --yes;
+sleep 5
 done
 EOF
 )

@@ -10,12 +10,23 @@ on:
         options:
           - 2
           - 4
+      rollaps:
+        description: 'Number of rollaps to deploy'
+        required: true
+        default: '1'
+        type: choice
+        options:
+          - 1
+          - 2
+          - 4
+          - 8
 
 jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
     env:
+      ROLLAPS: ${{ github.event.inputs.rollaps || 1 }}
       VALIDATORS: ${{ github.event.inputs.validators || 1 }}
       DATA_USER: ${{ github.actor }}
     permissions:
@@ -50,4 +61,7 @@ jobs:
       run: |
         ./.github/scripts/bootstrap_network.sh ${{ env.VALIDATORS }}
     
+    - name: Deploy RollApps
+      run: |
+        ./.github/scripts/deploy_rollApps.sh ${{ env.ROLLAPS }}  
 
