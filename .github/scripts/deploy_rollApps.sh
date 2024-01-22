@@ -67,6 +67,6 @@ SG_ID=`get_sg_id`
 InstanceProfile=`get_iam_instance_profile`
 
 #SPIN ROLLAPS' NODES
-for INDEX in $(seq $ROLLAP); do
+for INDEX in $(seq $ROLLAPS); do
     create_node
 done
