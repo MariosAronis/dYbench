@@ -133,4 +133,9 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
 
   echo $VALIDATORS_ACCOUNTS | jq . >> accounts.json
   aws s3 cp accounts.json s3://dybenchd-binaries/
- 
+  sleep 5
+
+ # PROVIDE STAKING ALLOCATION FOR JOINING VALIDATORS
+ INSTANCE_ID=`jq -r .leader <<< $NODES`
+ parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/allocate_DYM.sh'"
+ COMMAND_ID=`ssm_command`
