@@ -61,7 +61,7 @@ jobs:
       run: |
         ./.github/scripts/bootstrap_network.sh ${{ env.VALIDATORS }}
     
-    - name: Deploy RollApps
-      run: |
-        ./.github/scripts/deploy_rollApps.sh ${{ env.ROLLAPS }}  
+    # - name: Deploy RollApps
+    #   run: |
+    #     ./.github/scripts/deploy_rollApps.sh ${{ env.ROLLAPS }}  
 
