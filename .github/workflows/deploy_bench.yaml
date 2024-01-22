@@ -10,16 +10,16 @@ on:
         options:
           - 2
           - 4
-      rollaps:
-        description: 'Number of rollaps to deploy'
-        required: true
-        default: '1'
-        type: choice
-        options:
-          - 1
-          - 2
-          - 4
-          - 8
+      # rollaps:
+      #   description: 'Number of rollaps to deploy'
+      #   required: false
+      #   default: '1'
+      #   type: choice
+      #   options:
+      #     - 1
+      #     - 2
+      #     - 4
+      #     - 8
 
 jobs:
   deploy:
