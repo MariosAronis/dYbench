@@ -60,7 +60,7 @@ delete_node () {
     pass
 }
 
-#FETCH INFRA DETAILS
+#FETCH INFRASTRUCTURE DETAILS
 VPC_ID=`get_vpc_id`
 SUBNET_ID=`get_subnet_id`
 SG_ID=`get_sg_id`
@@ -69,4 +69,17 @@ InstanceProfile=`get_iam_instance_profile`
 #SPIN ROLLAPS' NODES
 for INDEX in $(seq $ROLLAPS); do
     create_node
+
+#PSEUDO CODE BELOW THIS LINE
+    install roller
+    configure roller:
+        {{ roller id }}
+        {{ denom }}
+        {{ token-supply }}
+        {{ hub }}   >> only option currently is local aka roller deploys cohosted with a full hub node \
+                       ideally we would like to deploy the bench rollapps on independent instances
+        {{ da }}
+    fund relayer and sequencer addresses
+    register sequencer with private dymensionhub testnet
+    roller run
 done

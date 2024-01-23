@@ -12,7 +12,7 @@ SEQUENCE=$($HOME/go/bin/dymd query account \
 --output json | jq -r '.base_account | .sequence');
 echo $SEQUENCE;
 $HOME/go/bin/dymd tx bank send local-user \
-$address 1000000000000000000000000000udym \
+$address 10000000000000000000udym \
 --chain-id dymension_999-9 \
 --from "local-user" \
 --fees 20000000000000udym \
