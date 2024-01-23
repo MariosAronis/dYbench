@@ -139,3 +139,10 @@ for ((NODE_INDEX=START;NODE_INDEX<=END;NODE_INDEX++));
  INSTANCE_ID=`jq -r .leader <<< $NODES`
  parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/allocate_DYM.sh'"
  COMMAND_ID=`ssm_command`
+
+ # Create validators
+ # THIS IS PSEUDO CODE
+
+ for node in $NODES; do
+ parameters="commands='bash /home/ubuntu/dYbench/.github/scripts/create_validator.sh'"
+ COMMAND_ID='ssm_command'

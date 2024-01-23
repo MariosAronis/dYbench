@@ -65,3 +65,31 @@ jobs:
       run: |
         ./.github/scripts/deploy_rollApps.sh ${{ env.ROLLAPS }}  
 
+# This is dummy code:        
+    - name: Instantiate Redis and configure schema
+      run: |
+        ./.github/scripts/deploy_redis.sh
+
+# These are dummy steps :
+#
+# Based on tx type selection, the workflow sends a workflow_dispatch trigger that launches 
+# a separate wf for each type, for example dybench_workload1.yaml
+
+
+# when all workloads are finished, we release all computes besides redis:
+    - name: Terminate Computes
+      run: |
+        ./.github/scripts/terminate_computes.sh
+      
+    - name: Calculate bench results
+      run: |
+        ./.github/scripts/calculate.sh
+    
+    - name: Upload Bench results Artifact
+      run: |
+        pass
+
+    - name: Terminate Redis
+      run: |
+        pass
+
